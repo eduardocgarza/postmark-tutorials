@@ -1,0 +1,30 @@
+{
+  "name": "postmark-webhooks-local",
+  "version": "1.0.0",
+  "description": "Local Express app for Postmark outbound stats and webhook capture.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "concurrently --kill-others-on-fail -n api,webhooks -c green,blue \"npm run dev:api\" \"npm run dev:webhooks\"",
+    "dev:api": "nodemon",
+    "dev:webhooks": "node scripts/dev-services.js",
+    "postmark:webhooks": "node scripts/register-postmark-webhooks.js",
+    "lint": "eslint .",
+    "check": "node --check src/server.js && node --check src/webhooks.js && node --check scripts/register-postmark-webhooks.js && node --check scripts/dev-services.js && npm run lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@ngrok/ngrok": "^1.7.0",
+    "concurrently": "^10.0.3",
+    "eslint": "^10.5.0",
+    "nodemon": "^3.1.14"
+  }
+}

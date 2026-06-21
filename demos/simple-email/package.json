@@ -1,0 +1,40 @@
+{
+  "name": "postmark-tutorials",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "tsx --no-warnings src/index.js",
+    "dev": "nodemon --ext js,jsx,mjs,cjs,json --exec tsx --no-warnings src/index.js",
+    "email:dev": "email dev --dir ./src/system-emails/emails",
+    "email:render": "node --import tsx scripts/render-welcome.js",
+    "email:send": "node --import tsx scripts/send-welcome.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eduardocgarza/postmark-tutorials.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eduardocgarza/postmark-tutorials/issues"
+  },
+  "homepage": "https://github.com/eduardocgarza/postmark-tutorials#readme",
+  "dependencies": {
+    "@react-email/components": "^1.0.12",
+    "@react-email/render": "^2.0.9",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "postmark": "^4.0.7",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-email": "^6.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "tsx": "^4.22.4"
+  }
+}
