@@ -47,7 +47,7 @@ export class PostmarkClient {
     });
     const responseBody = await this.#parseResponseBody(response);
 
-    if (allowNotFound && response.status === 404) {
+    if (allowNotFound && this.#isNotFoundResponse(response, responseBody)) {
       return null;
     }
 
@@ -77,5 +77,12 @@ export class PostmarkClient {
     } catch {
       return responseText;
     }
+  }
+
+  static #isNotFoundResponse(response, responseBody) {
+    return (
+      response.status === 404 ||
+      (response.status === 422 && responseBody?.ErrorCode === 1302)
+    );
   }
 }

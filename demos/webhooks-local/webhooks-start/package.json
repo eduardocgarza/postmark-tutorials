@@ -1,0 +1,21 @@
+{
+  "name": "postmark-webhooks-start",
+  "version": "1.0.0",
+  "description": "Starter Express app for sending a Postmark email locally.",
+  "type": "module",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "postmark": "^4.0.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
