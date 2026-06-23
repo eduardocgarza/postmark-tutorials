@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "checkJs": false,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2023"
+  },
+  "include": ["src/**/*.js", "eslint.config.js"],
+  "exclude": ["node_modules"]
+}

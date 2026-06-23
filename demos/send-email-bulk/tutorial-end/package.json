@@ -1,0 +1,29 @@
+{
+  "name": "postmark-send-email-bulk-end",
+  "version": "1.0.0",
+  "description": "Basic Express app for the Postmark send email bulk tutorial.",
+  "type": "module",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon",
+    "lint": "eslint .",
+    "check": "node --check src/config.js && node --check src/app.js && npm run lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "postmark": "^4.0.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.5.0",
+    "nodemon": "^3.1.14"
+  }
+}
