@@ -15,13 +15,13 @@ app.get("/", (req, res) => {
   res.json({
     message: "Postmark React Email tutorial",
     endpoints: {
-      sendWelcomeEmail: "POST /send-welcome-email",
-      renderWelcomeEmail: "POST /render-welcome-email",
+      sendWelcomeEmail: "POST /send-email",
+      renderWelcomeEmail: "POST /render-email",
     },
   });
 });
 
-app.post("/render-welcome-email", async (req, res) => {
+app.post("/render-email", async (req, res) => {
   try {
     const message = await WelcomeEmailService.renderWelcome({
       email: req.body.email || TO_EMAIL,
@@ -43,7 +43,7 @@ app.post("/render-welcome-email", async (req, res) => {
   }
 });
 
-app.post("/send-welcome-email", async (req, res) => {
+app.post("/send-email", async (req, res) => {
   try {
     const postmarkResponse = await WelcomeEmailService.sendWelcome({
       email: req.body.email || TO_EMAIL,
