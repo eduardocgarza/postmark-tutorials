@@ -1,20 +1,13 @@
 import postmark from "postmark";
 
-const DEFAULT_MESSAGE_STREAM = "outbound";
+const FROM_EMAIL = "hello@littleacornchildcare.ca";
+const MESSAGE_STREAM = "outbound";
 
 class PostmarkProvider {
   #client;
 
   get #serverToken() {
     return process.env.POSTMARK_SERVER_TOKEN;
-  }
-
-  get #fromAddress() {
-    return process.env.POSTMARK_SENDER_EMAIL;
-  }
-
-  get #messageStream() {
-    return process.env.POSTMARK_MESSAGE_STREAM || DEFAULT_MESSAGE_STREAM;
   }
 
   #getClient() {
@@ -30,17 +23,13 @@ class PostmarkProvider {
   }
 
   async send({ to, subject, html, text }) {
-    if (!this.#fromAddress) {
-      throw new Error("POSTMARK_SENDER_EMAIL is required.");
-    }
-
     return this.#getClient().sendEmail({
-      From: this.#fromAddress,
+      From: FROM_EMAIL,
       To: to,
       Subject: subject,
       HtmlBody: html,
       TextBody: text,
-      MessageStream: this.#messageStream,
+      MessageStream: MESSAGE_STREAM,
     });
   }
 }

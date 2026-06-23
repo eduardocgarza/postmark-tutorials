@@ -7,6 +7,7 @@ import { WelcomeEmailService } from "./system-emails/service.jsx";
 
 const app = express();
 const port = process.env.PORT || 3000;
+const TO_EMAIL = "eduardo@garza.ca";
 
 app.use(express.json());
 
@@ -23,7 +24,7 @@ app.get("/", (req, res) => {
 app.post("/render-welcome-email", async (req, res) => {
   try {
     const message = await WelcomeEmailService.renderWelcome({
-      email: req.body.email || process.env.POSTMARK_RECIPIENT_EMAIL,
+      email: req.body.email || TO_EMAIL,
       firstName: req.body.firstName || "Lucy",
       lastName: req.body.lastName || "Circle",
       appURL:
@@ -45,7 +46,7 @@ app.post("/render-welcome-email", async (req, res) => {
 app.post("/send-welcome-email", async (req, res) => {
   try {
     const postmarkResponse = await WelcomeEmailService.sendWelcome({
-      email: req.body.email || process.env.POSTMARK_RECIPIENT_EMAIL,
+      email: req.body.email || TO_EMAIL,
       firstName: req.body.firstName || "Lucy",
       lastName: req.body.lastName || "Circle",
       appURL:

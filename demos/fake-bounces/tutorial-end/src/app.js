@@ -1,15 +1,12 @@
 import express from "express";
 import postmark from "postmark";
-import {
-  HOST,
-  PORT,
-  POSTMARK_FROM_EMAIL,
-  POSTMARK_MESSAGE_STREAM,
-  POSTMARK_SERVER_TOKEN,
-  POSTMARK_TO_EMAIL,
-} from "./config.js";
+import { HOST, PORT, POSTMARK_SERVER_TOKEN } from "./config.js";
 
 const app = express();
+
+const FROM_EMAIL = "hello@littleacornchildcare.ca";
+const TO_EMAIL = "eduardo@garza.ca";
+const MESSAGE_STREAM = "outbound";
 
 app.use(express.json({ limit: "1mb" }));
 
@@ -27,34 +24,20 @@ app.post("/send-email", async (req, res, next) => {
 
     const body = req.body && typeof req.body === "object" ? req.body : {};
     const {
-      from = POSTMARK_FROM_EMAIL,
-      to = POSTMARK_TO_EMAIL,
       subject = "Hello from Postmark",
       htmlBody = "<strong>Hello</strong> from the fake bounces tutorial.",
       textBody = "Hello from the fake bounces tutorial.",
-      messageStream = POSTMARK_MESSAGE_STREAM,
     } = body;
 
-    if (!from || !to) {
-      return res.status(400).json({
-        error: "POSTMARK_FROM_EMAIL and POSTMARK_TO_EMAIL are required",
-      });
-    }
-
-    const message = {
-      From: from,
-      To: to,
+    const client = new postmark.ServerClient(POSTMARK_SERVER_TOKEN);
+    const response = await client.sendEmail({
+      From: FROM_EMAIL,
+      To: TO_EMAIL,
       Subject: subject,
       HtmlBody: htmlBody,
       TextBody: textBody,
-    };
-
-    if (messageStream) {
-      message.MessageStream = messageStream;
-    }
-
-    const client = new postmark.ServerClient(POSTMARK_SERVER_TOKEN);
-    const response = await client.sendEmail(message);
+      MessageStream: MESSAGE_STREAM,
+    });
 
     return res.status(202).json(response);
   } catch (error) {
@@ -76,7 +59,7 @@ app.use((error, _req, res, _next) => {
 
 const server = app.listen(PORT, HOST, () => {
   console.log(
-    `Postmark fake bounces starter listening on http://${HOST}:${PORT}`,
+    `Postmark fake bounces app listening on http://${HOST}:${PORT}`,
   );
 });
 
