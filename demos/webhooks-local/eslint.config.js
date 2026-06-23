@@ -6,7 +6,6 @@ export default [
       "node_modules/**",
       "webhooks/**",
       ".dev-services.local.json",
-      ".postmark-webhooks.local.json",
     ],
   },
   js.configs.recommended,

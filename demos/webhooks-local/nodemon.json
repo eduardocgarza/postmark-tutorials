@@ -1,12 +1,11 @@
 {
   "watch": ["src"],
   "ext": "js,json",
-  "exec": "node src/server.js",
+  "exec": "node src/app.js",
   "ignore": [
     "node_modules/**",
     "scripts/**",
     "webhooks/**",
-    ".dev-services.local.json",
-    ".postmark-webhooks.local.json"
+    ".dev-services.local.json"
   ]
 }
